@@ -36,8 +36,6 @@ def main_loop():
         print "Iniciando criacao do mapa de ocupacao."
 
         map.initialize_new_map(graph.arr_nodes[my_node], 0.3)
-        map.print_map()
-        exit(1)
 
         points = graph.arr_nodes[my_node]['edges']
         data.params['cord_range'] = 2.5
@@ -45,10 +43,13 @@ def main_loop():
         for point in points:
             data.params['cord_x'] = point[0]
             data.params['cord_y'] = point[1]
+            map.scanner()
 
             while not move.move():
                 if rospy.is_shutdown():
                     raise rospy.ROSInterruptException
+
+        map.print_map()
 
     else:
         print "Este no nao e um no valido\n Por favor mova o robo para um no valido!"
