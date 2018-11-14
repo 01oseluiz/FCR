@@ -16,7 +16,7 @@ block_size = None       # Size of the division
 
 
 def initialize_new_map(node_param, block_size_param):
-    global node
+    global node, block_size
     global x_max_global, x_min_global, y_max_global, y_min_global
     global blocks_number_x, blocks_number_y
     global occ_map_mtx
@@ -34,7 +34,7 @@ def initialize_new_map(node_param, block_size_param):
     blocks_number_x = int((x_max_global - x_min_global) / block_size)
     blocks_number_y = int((y_max_global - y_min_global) / block_size)
 
-    occ_map_mtx = [[0 for y in range(blocks_number_y + 2 * margin_size)] for x in
+    occ_map_mtx = [[0.0 for y in range(blocks_number_y + 2 * margin_size)] for x in
                    range(blocks_number_x + 2 * margin_size)]
 
 
@@ -65,8 +65,8 @@ def print_map():
 def scanner():
     for range_distance in data.hokuyo_ranges:
         ang = ((data.hokuyo_ranges.index(range_distance) * data.hokuyo_ang_inc) - (math.pi * 135 / 180)) + data.yaw
-        p_x = (data.abs_position_x + range_distance * math.cos(ang) - x_min_global) / block_size
-        p_y = (data.abs_position_y + range_distance * math.sin(ang) - y_min_global) / block_size
+        p_x = ((data.abs_position_x + range_distance * math.cos(ang) - x_min_global) / block_size) + margin_size
+        p_y = ((data.abs_position_y + range_distance * math.sin(ang) - y_min_global) / block_size) + margin_size
 
-        if 0 <= p_x+margin_size <= blocks_number_x + 2*margin_size and 0 <= p_y+margin_size <= blocks_number_y + 2*margin_size:
-            occ_map_mtx[int(p_x)+margin_size][int(p_y)+margin_size] = 1
+        if 0 <= p_x <= blocks_number_x and 0 <= p_y <= blocks_number_y:
+            occ_map_mtx[int(p_x)][int(p_y)] += 0.25
