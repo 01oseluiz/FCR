@@ -44,6 +44,7 @@ def is_connected_node(n_grapho):
     return n_grapho in arr_nodes[n_grapho]['connected_nodes']
 
 
+# TODO - Melhorar esta logica
 def is_inside_of_node((p_x, p_y), edges):
     points_in_x = map(lambda p: p[0], edges)
     points_in_y = map(lambda p: p[1], edges)
@@ -51,6 +52,39 @@ def is_inside_of_node((p_x, p_y), edges):
     is_in_y = min(points_in_y) <= p_y <= max(points_in_y)
 
     return is_in_x and is_in_y
+
+
+# Calc a route from A to X node
+def calc_route(final_node):
+    actual_node = arr_nodes[my_node()]['node']
+    py_graph = convert_graph_to_py_format()
+
+    return find_path(py_graph, actual_node, final_node)[1:]
+
+
+# Convert actual data structure to python graph
+def convert_graph_to_py_format():
+    py_graph = {}
+
+    for node in arr_nodes:
+        if node != '':
+            py_graph[node['node']] = node['connected_nodes']
+
+    return py_graph
+
+
+# Return an array of nodes to archive the X node
+def find_path(graph, start, end, path=[]):
+    path = path + [start]
+    if start == end:
+        return path
+    if not graph.has_key(start):
+        return None
+    for node in graph[start]:
+        if node not in path:
+            newpath = find_path(graph, node, end, path)
+            if newpath: return newpath
+    return None
 
 
 def print_all_nodes():
