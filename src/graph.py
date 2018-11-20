@@ -59,7 +59,7 @@ def calc_route(final_node):
     actual_node = arr_nodes[my_node()]['node']
     py_graph = convert_graph_to_py_format()
 
-    return find_path(py_graph, actual_node, final_node)[1:]
+    return find_shortest_path(py_graph, actual_node, final_node)[1:]
 
 
 # Convert actual data structure to python graph
@@ -74,17 +74,20 @@ def convert_graph_to_py_format():
 
 
 # Return an array of nodes to archive the X node
-def find_path(graph, start, end, path=[]):
+def find_shortest_path(graph, start, end, path=[]):
     path = path + [start]
     if start == end:
         return path
     if not graph.has_key(start):
         return None
+    shortest = None
     for node in graph[start]:
         if node not in path:
-            newpath = find_path(graph, node, end, path)
-            if newpath: return newpath
-    return None
+            newpath = find_shortest_path(graph, node, end, path)
+            if newpath:
+                if not shortest or len(newpath) < len(shortest):
+                    shortest = newpath
+    return shortest
 
 
 def print_all_nodes():
