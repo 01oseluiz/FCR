@@ -1,6 +1,5 @@
 # FCR
 Repositório para trabalhos de robótica.  
-Branch para o **Roteiro 5**
 
 # SISTEMA E VERSÕES
 Sistema Operacional: Ubuntu 18.04  
@@ -20,6 +19,3 @@ Ele irá pegar todos os pontos que formam este nó e andará pelas suas arestas 
 * O robô irá criar o mapa de ocupação para o nó em que estiver no momento da execução do programa.    
 * A imagem que indica as divisões e os números de cada nó esta em: assets > imgs > FGH.pgm  
 * A saida do programa (mapa de ocupação) e dada em um txt localizado em: assets > text > map_NumeroDoNo.txt
-
-# ERROS
-* cordenada do objeto calculado pelo hokuyo errado
