@@ -27,32 +27,33 @@ def setup():
 
 def main_loop():
 
-    raw_input("Precione qualquer tecla para iniciar a criacao de um mapa de ocupacao: ")
-
     my_node = graph.my_node()
 
     if my_node:
         print "Estamos no numero: " + str(my_node)
-        print "Iniciando criacao do mapa de ocupacao."
+        final_node = raw_input("Entre com o numero do no final desejado: ")
 
-        map.initialize_new_map(graph.arr_nodes[my_node], 0.3)
+        nodes = graph.calc_route(int(final_node))
 
-        points = graph.arr_nodes[my_node]['edges']
-        data.params['cord_range'] = 2.5
+        if not nodes:
+            print "Nao ha um rota para este no ou ele ainda nao foi mapeado!\n"
+            return
 
-        for point in points:
-            data.params['cord_x'] = point[0]
-            data.params['cord_y'] = point[1]
-            map.scanner()
+        print "DETALHES DA ROTA: " + str(nodes)
+
+        for node in nodes:
+            print "Agora estamos indo para o numero: " + str(node)
+
+            data.params['cord_x'] = graph.arr_nodes[node]['center'][0]
+            data.params['cord_y'] = graph.arr_nodes[node]['center'][1]
+            # map.scanner()
 
             while not move.move():
                 if rospy.is_shutdown():
                     raise rospy.ROSInterruptException
 
-        map.print_map()
-
     else:
-        print "Este no nao e um no valido\n Por favor mova o robo para um no valido!"
+        print "Este no nao e um no valido\n Por favor mova o robo para um no valido!\n"
 
     rate.sleep()
 
