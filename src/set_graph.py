@@ -26,6 +26,7 @@ def callback_pose(odometry):
 # ------------------ End CallBacks ------------------
 
 
+# Add to grafo file the new node created
 def append_to_file(msg_str):
     file = open('../assets/text/grafo.txt', 'a')
 
@@ -36,6 +37,7 @@ def append_to_file(msg_str):
     return
 
 
+# Logic to create and save a new node in the file
 def save_new_node(node_number, connected_nodes):
     # p_x and p_y
     first_edge = [0, 0]
@@ -70,7 +72,7 @@ def save_new_node(node_number, connected_nodes):
 
     return
 
-
+# Verify if the given point is in the range
 def is_in_range((p_x, p_y), p_range):
     is_in_x = p_x - p_range <= global_position['pos_x'] <= p_x + p_range
     is_in_y = p_y - p_range <= global_position['pos_y'] <= p_y + p_range
@@ -78,6 +80,7 @@ def is_in_range((p_x, p_y), p_range):
     return is_in_x and is_in_y
 
 
+# Calculates the middle of the node, based on his edges
 def calc_middle(arr_points):
     points_in_x = map(lambda p: p[0], arr_points)
     points_in_y = map(lambda p: p[1], arr_points)
@@ -100,6 +103,7 @@ def listener():
 
     rospy.Subscriber("pose", Odometry, callback_pose)
 
+    # Wait until data is loaded
     while (len(global_position) < 2):
         rate.sleep()
 

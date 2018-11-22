@@ -2,7 +2,8 @@ import math
 import data
 import graph
 
-# --- Class Variables - OCCUPATIONAL_MAP ----
+# --------- Class Variables - OCCUPATIONAL_MAP -------------
+
 node = None  # node of occupational map
 x_max_global = None     # max limit of area in x
 x_min_global = None     # min limit of area in x
@@ -14,7 +15,11 @@ occ_map_mtx = [[]]      # matrix of occupational map -> occ_map_mtx[x_point][y_p
 margin_size = 10        # Margin of map
 block_size = None       # Size of the division
 
+# ---------------- END Class Variables --------------------
 
+
+# Create a new empty occupational map
+# Receive the node associated with this new occupational map and the resolutions of the map (his size)
 def initialize_new_map(node_param, block_size_param):
     global node, block_size
     global x_max_global, x_min_global, y_max_global, y_min_global
@@ -38,6 +43,7 @@ def initialize_new_map(node_param, block_size_param):
                    range(blocks_number_x + 2 * margin_size)]
 
 
+# Print he occupation map in the file with name of the node
 def print_map():
     file = open('../assets/text/map_' + str(node['node']) + '.txt', 'w')
 
@@ -62,6 +68,7 @@ def print_map():
     print "Mapa criado com sucesso!"
 
 
+# Makes one scanning from the current position of robot, and compose the occupational map
 def scanner():
     for range_distance in data.hokuyo_ranges:
         ang = ((data.hokuyo_ranges.index(range_distance) * data.hokuyo_ang_inc) - (math.pi * 135 / 180)) + data.yaw

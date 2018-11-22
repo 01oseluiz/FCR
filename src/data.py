@@ -4,7 +4,7 @@ from sensor_msgs.msg import LaserScan  # To /sonar_front, /sonar_back, /hokuyo_s
 from nav_msgs.msg import Odometry  # To /pose
 from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
-# --- Class Variables - DATA ----
+# ------------ Class Variables - DATA -------------
 
 front_min = None
 front_min_ang = None
@@ -27,6 +27,8 @@ params = {'type_sensor': 'lase',
           'cord_range': 0.1,
           'waypoint_x': 0,
           'waypoint_y': 0}
+
+# ------------------ END Class Variables --------------
 
 
 def initialize():

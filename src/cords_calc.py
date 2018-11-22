@@ -3,6 +3,7 @@ import math
 import graph
 
 
+# Calculates the desired yaw to reach the point
 def desired_yaw():
     co = data.params['cord_y'] - data.abs_position_y
     ca = data.params['cord_x'] - data.abs_position_x
@@ -10,6 +11,7 @@ def desired_yaw():
     return math.atan2(co, ca)
 
 
+# Calculates the necessary yaw to reach the waypoint
 def waypoint_yaw():
     co = data.params['waypoint_y'] - data.abs_position_y
     ca = data.params['waypoint_x'] - data.abs_position_x
@@ -17,6 +19,7 @@ def waypoint_yaw():
     return math.atan2(co, ca)
 
 
+# Calculates the necessary yaw to reach any point x,y
 def yaw_to_point(x, y):
     co = y - data.abs_position_y
     ca = x - data.abs_position_x
@@ -24,11 +27,7 @@ def yaw_to_point(x, y):
     return math.atan2(co, ca)
 
 
-def set_node_as_cords(n_grapho):
-    data.params['cord_x'] = graph.arr_nodes[n_grapho]['center'][0]
-    data.params['cord_y'] = graph.arr_nodes[n_grapho]['center'][1]
-
-
+# Calculates if the point (x,y) is in range of collision with a rectangular object formed by range(x,y)
 def in_range_of_collision(p_x, p_y, range_x=1, range_y=3):
     if p_y > 0:
         return abs(p_x) < range_x and p_y < range_y
@@ -36,6 +35,7 @@ def in_range_of_collision(p_x, p_y, range_x=1, range_y=3):
     return False
 
 
+# Calculates the distance between two points
 def distance_between_points((p1_x, p1_y), (p2_x, p2_y)):
     ca = p1_x - p2_x
     co = p1_y - p2_y

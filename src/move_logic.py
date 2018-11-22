@@ -4,8 +4,8 @@ import rospy
 from geometry_msgs.msg import Twist
 import math
 
-
 pub = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+
 
 # Return true when reached the point
 def move():
@@ -67,10 +67,9 @@ def move():
     return False
 
 
-
+# Calculate the intermediary point based in the quantity of distant points
+# EXAMPLE: 10 points side by side with distances similar (bean with ang great enough)
 def new_waypoint():
-    # calcular ponto intermediario baseado na quantidade de pontos distantes
-    # exemplo 10 ponto lado a lado com distancias semelhantes (feixe com angulo grande o suficiente)
     n_ranges = 10
     min_distance = 3
     potential_ranges = []  # x and y of each range and pontuations of how mutch better is the range

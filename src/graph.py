@@ -10,10 +10,6 @@ import data
 arr_nodes = []
 
 
-def is_grapho_initialized():
-    return arr_nodes > 1
-
-
 def initialize():
     global arr_nodes
     arr_nodes = [''] * 200
@@ -32,6 +28,11 @@ def initialize():
                                 'edges': temp_edges}
 
 
+def is_grapho_initialized():
+    return arr_nodes > 1
+
+
+# Return my current Node
 def my_node():
     for node in arr_nodes:
         if node != '' and is_inside_of_node([data.abs_position_x, data.abs_position_y], node['edges']):
@@ -40,11 +41,13 @@ def my_node():
     return False
 
 
+# Return if a given number of the grapho is connected to the current Node
 def is_connected_node(n_grapho):
     return n_grapho in arr_nodes[n_grapho]['connected_nodes']
 
 
 # TODO - Melhorar esta logica
+# Return if a given point is inside of node (inside fo his edges)
 def is_inside_of_node((p_x, p_y), edges):
     points_in_x = map(lambda p: p[0], edges)
     points_in_y = map(lambda p: p[1], edges)
