@@ -1,4 +1,8 @@
 import data
+import cords_calc as calc
+import itertools
+from itertools import izip
+import math
 
 # ---------- GLOBAL HASH VARIABLE ------------
 # arr_nodes[node]:
@@ -35,7 +39,7 @@ def is_grapho_initialized():
 # Return my current Node
 def my_node():
     for node in arr_nodes:
-        if node != '' and is_inside_of_node([data.abs_position_x, data.abs_position_y], node['edges']):
+        if node != '' and is_inside_of_edges([data.abs_position_x, data.abs_position_y], node['edges'], node['node']):
             return node['node']
 
     return False
@@ -46,15 +50,36 @@ def is_connected_node(n_grapho):
     return n_grapho in arr_nodes[n_grapho]['connected_nodes']
 
 
-# TODO - Melhorar esta logica
-# Return if a given point is inside of node (inside fo his edges)
-def is_inside_of_node((p_x, p_y), edges):
-    points_in_x = map(lambda p: p[0], edges)
-    points_in_y = map(lambda p: p[1], edges)
-    is_in_x = min(points_in_x) <= p_x <= max(points_in_x)
-    is_in_y = min(points_in_y) <= p_y <= max(points_in_y)
+# Return if a given point is inside of node (inside of his edges)
+def is_inside_of_edges(p, edges, node):
+    count = 0
+    # if node != 57:
+    #     return False
 
-    return is_in_x and is_in_y
+    for a, b in pairwise(edges + [edges[0]]):
+        if before_on_segment(p, a, b):
+            count += 1
+
+    # if node == 57:
+    #     print count
+
+    if count % 2 == 1:
+        return True
+    else:
+        return False
+
+
+# Given three colinear points p, a, b, the function checks if
+# point p lies before one line segment 'ab'
+# where p[0] is p.x and p[1] is p.y
+def before_on_segment(p, a, b):
+    if p[0] <= max(a[0], b[0]) and min(a[1], b[1]) < p[1] < max(a[1], b[1]):
+        p_x_intersection = (p[1] - min(a[1], b[1])) * abs(b[0] - a[0]) / abs(b[1] - a[1])
+
+        if p_x_intersection >= p[0] - min(a[0], b[0]):
+            return True
+
+    return False
 
 
 # Calc a route from A to X node
@@ -100,3 +125,11 @@ def print_all_nodes():
             print "Connected: " + str(node['connected_nodes'])
             print "Center: " + str(node['center'])
             print "Edges: " + str(node['edges'])
+
+
+# function that return an interator in pair
+# s -> (s0,s1), (s1,s2), (s2, s3), ...
+def pairwise(iterable):
+    a, b = itertools.tee(iterable)
+    next(b, None)
+    return izip(a, b)

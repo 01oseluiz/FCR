@@ -80,6 +80,7 @@ def is_in_range((p_x, p_y), p_range):
     return is_in_x and is_in_y
 
 
+# TODO - melhorar esta funcao
 # Calculates the middle of the node, based on his edges
 def calc_middle(arr_points):
     points_in_x = map(lambda p: p[0], arr_points)

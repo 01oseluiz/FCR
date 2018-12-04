@@ -57,6 +57,7 @@ def move():
             vel.angular.z = 0
             # print "Em rota de colisao"
 
+        # TODO - melhorar o sistema anti colisoes
         # Evit collisions
         if calc.in_range_of_collision(pos_x, pos_y, 1, 2):
             vel.angular.z = 1 / (pos_x / 2) * 5
