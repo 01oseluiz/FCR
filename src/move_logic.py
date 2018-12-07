@@ -31,7 +31,6 @@ def move():
     if (x_min <= data.abs_position_x <= x_max and
             y_min <= data.abs_position_y <= y_max):
 
-        print "CHEGUEEEI !!!!"
         return True
 
     # Deal with volocity to reach a point(x,y)

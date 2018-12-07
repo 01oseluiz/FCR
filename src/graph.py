@@ -38,8 +38,13 @@ def is_grapho_initialized():
 
 # Return my current Node
 def my_node():
+    return node_from_point([data.abs_position_x, data.abs_position_y])
+
+
+# Return the node that contain the point
+def node_from_point((p_x,p_y)):
     for node in arr_nodes:
-        if node != '' and is_inside_of_edges([data.abs_position_x, data.abs_position_y], node['edges'], node['node']):
+        if node != '' and is_inside_of_edges([p_x, p_y], node['edges'], node['node']):
             return node['node']
 
     return False

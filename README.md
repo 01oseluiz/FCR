@@ -28,3 +28,8 @@ O presente projeto visa
 
 
 ## ERROS
+
+## OBS
+- Alguns blocos ficam em branco, mesmo sendo preenchidos devido aos arredondamentos e baixa resolução utilizada
+tornando alguns pontos preenchidos mesmo vázios e outros vázios mesmo estando cheios
+- nos mapeados do numero 1 ao 78
