@@ -60,3 +60,10 @@ Repositório para trabalhos de robótica: https://github.com/01oseluiz/FCR
 tornando alguns pontos preenchidos mesmo vázios e outros vázios mesmo estando cheios
 - Nós mapeados do número 1 ao 78 (arquivo: text > grafo.txt)
 - É possível visualizar a divisão dos nos no arquivo: imgs > FGH.pgm
+
+## REFERÊNCIAS
+[1] **[Ros - Documentação](http://wiki.ros.org/)**  
+[2] **[Python 2.7.15 - Documentação](https://docs.python.org/2/index.html)**  
+[3] **Arquivos de aula**  
+[4] **Consulta a colegas de sala**  
+[5] **How to check if a given point lies inside or outside a polygon** - https://www.geeksforgeeks.org/how-to-check-if-a-given-point-lies-inside-a-polygon/  

@@ -73,7 +73,7 @@ def print_map():
     print "Mapa " + str(node['node']) + " criado com sucesso!"
 
 
-# Makes some scanning from the current position of robot, and compose the occupational map
+# Makes a scanning in 360 from the current position of robot, and compose the occupational map
 def scanner():
     vel = Twist()
     rate = rospy.Rate(100)
@@ -97,7 +97,7 @@ def scanner():
             rate.sleep()
 
 
-# Makes one scanning from the current position of robot, and compose the occupation map
+# Makes one scanning from the current position of robot, without rotate robot, and compose the occupation map
 def scanner_once():
     ranges = data.hokuyo_ranges
 
@@ -178,6 +178,7 @@ def read_node_map(node_param):
     file_text = open('../assets/text/map_' + str(node['node']) + '.txt', 'r')
     head_text = str([next(file_text) for x in xrange(4)])
 
+    # Extract header information
     temp_n_col = int(re.search(r'(\d*)x(\d*)', head_text).group(1))
     temp_n_row = int(re.search(r'(\d*)x(\d*)', head_text).group(2))
     margin_size = int(re.search(r'Margem: (\d*)', head_text, re.I).group(1))
@@ -187,6 +188,7 @@ def read_node_map(node_param):
 
     block_size = (x_max_global - x_min_global) / blocks_number_x
 
+    # Read the occupational map
     temp_map = []
     for index, line in enumerate(file_text):
         temp_map += [map(lambda x: 1 if x == '\xe2' else (-1 if x == ' ' else 0), re.findall(r' (.)', line))]
@@ -198,6 +200,7 @@ def read_node_map(node_param):
 
 def print_map_terminal():
 
+    # Relative position of robot in the occupational map
     my_relative_x = int(((data.abs_position_x - x_min_global) / block_size) + margin_size)
     my_relative_y = int(((data.abs_position_y - y_min_global) / block_size) + margin_size)
 
