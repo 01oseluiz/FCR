@@ -22,9 +22,9 @@ pitch = None
 yaw = None
 
 params = {'type_sensor': 'lase',
-          'cord_x': 0,
-          'cord_y': 0,
-          'cord_range': 0.1,
+          'coord_x': 0,
+          'coord_y': 0,
+          'coord_range': 0.1,
           'waypoint_x': 0,
           'waypoint_y': 0}
 
@@ -93,7 +93,7 @@ def callback_sonar_back(scan):
 
 
 def callback_hokuyo_scan(scan):
-    # TODO calculo de cordenadas errado - Fazer como no move.new_waypoint()
+    # TODO calculo de coordenadas errado - Fazer como no move.new_waypoint()
     global hokuyo_min, hokuyo_min_ang, hokuyo_ranges, hokuyo_ang_inc
 
     hokuyo_min = min(scan.ranges)

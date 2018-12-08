@@ -1,5 +1,5 @@
 import data
-import cords_calc as calc
+import coords_calc as calc
 import itertools
 from itertools import izip
 import math

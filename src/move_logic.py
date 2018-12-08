@@ -1,4 +1,4 @@
-import cords_calc as calc
+import coords_calc as calc
 import data
 import rospy
 from geometry_msgs.msg import Twist
@@ -12,10 +12,10 @@ def move():
     rel_positions = calc.relative_positions()
     vel = Twist()
 
-    x_min = data.params['cord_x'] - data.params['cord_range']
-    x_max = data.params['cord_x'] + data.params['cord_range']
-    y_max = data.params['cord_y'] + data.params['cord_range']
-    y_min = data.params['cord_y'] - data.params['cord_range']
+    x_min = data.params['coord_x'] - data.params['coord_range']
+    x_max = data.params['coord_x'] + data.params['coord_range']
+    y_max = data.params['coord_y'] + data.params['coord_range']
+    y_min = data.params['coord_y'] - data.params['coord_range']
 
     # Deal with objects with Sonar
     if data.params['type_sensor'] == "sonar":
@@ -96,7 +96,7 @@ def new_waypoint():
 
     if len(potential_ranges) > 0\
             and calc.distance_between_points((data.abs_position_x, data.abs_position_y),
-                                             (data.params['cord_x'], data.params['cord_y'])) >= 2:
+                                             (data.params['coord_x'], data.params['coord_y'])) >= 2:
 
         # Calculate the pontuation of the pontential ranges
         for index, value in enumerate(potential_ranges):
@@ -114,5 +114,5 @@ def new_waypoint():
         data.params['waypoint_y'] = better_pontuation[0]['p_y']
 
     else:
-        data.params['waypoint_x'] = data.params['cord_x']
-        data.params['waypoint_y'] = data.params['cord_y']
+        data.params['waypoint_x'] = data.params['coord_x']
+        data.params['waypoint_y'] = data.params['coord_y']

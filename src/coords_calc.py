@@ -5,8 +5,8 @@ import graph
 
 # Calculates the desired yaw to reach the point
 def desired_yaw():
-    co = data.params['cord_y'] - data.abs_position_y
-    ca = data.params['cord_x'] - data.abs_position_x
+    co = data.params['coord_y'] - data.abs_position_y
+    ca = data.params['coord_x'] - data.abs_position_x
 
     return math.atan2(co, ca)
 
