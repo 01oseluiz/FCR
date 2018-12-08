@@ -93,6 +93,8 @@ def walk_and_scan():
 
                 verify_interruption()
 
+        map.scanner_once()
+        map.print_map()
 
     else:
         print "Este no nao e um no valido\n Por favor mova o robo para um no valido!\n"

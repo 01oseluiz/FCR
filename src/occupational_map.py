@@ -70,7 +70,7 @@ def print_map():
         file.write(line.encode('utf8') + "\n")
 
     file.close()
-    print "Mapa criado com sucesso!"
+    print "Mapa " + str(node['node']) + " criado com sucesso!"
 
 
 # Makes some scanning from the current position of robot, and compose the occupational map

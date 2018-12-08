@@ -44,21 +44,24 @@ def move():
             vel.linear.x = 1.0
             vel.angular.z = 0
             # print "Na direcao certa"
-        elif not calc.in_range_of_collision(pos_x, pos_y, 1.1, 2.1):
+        elif not calc.in_range_of_collision(pos_x, pos_y, 0.5, 0.7):
             vel.linear.x = 0
-            if abs(calc.waypoint_yaw() - data.yaw) >= math.pi:
-                vel.angular.z = calc.waypoint_yaw() > data.yaw and -0.5 or 0.5
+            delta_yaw = abs(calc.waypoint_yaw() - data.yaw)
+            vel_angular = (delta_yaw + 0.05)
+
+            if delta_yaw >= math.pi:
+                vel.angular.z = calc.waypoint_yaw() > data.yaw and -vel_angular or vel_angular
             else:
-                vel.angular.z = calc.waypoint_yaw() > data.yaw and 0.5 or -0.5
+                vel.angular.z = calc.waypoint_yaw() > data.yaw and vel_angular or -vel_angular
             # print "Re direcinando"
         else:
-            vel.linear.x = 1
+            vel.linear.x = 0.3
             vel.angular.z = 0
             # print "Em rota de colisao"
 
         # TODO - melhorar o sistema anti colisoes
         # Evit collisions
-        if calc.in_range_of_collision(pos_x, pos_y, 1, 2):
+        if calc.in_range_of_collision(pos_x, pos_y, 0.4, 0.6):
             vel.angular.z = 1 / (pos_x / 2) * 5
             # print "Desviando"
 
@@ -91,7 +94,9 @@ def new_waypoint():
                                                     'distance': distance,
                                                     'ang': ang}]
 
-    if len(potential_ranges) > 0:
+    if len(potential_ranges) > 0\
+            and calc.distance_between_points((data.abs_position_x, data.abs_position_y),
+                                             (data.params['cord_x'], data.params['cord_y'])) >= 2:
 
         # Calculate the pontuation of the pontential ranges
         for index, value in enumerate(potential_ranges):
